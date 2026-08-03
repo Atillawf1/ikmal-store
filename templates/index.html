@@ -495,18 +495,32 @@ footer{background:#0d0f13;border-top:1px solid var(--line);padding:40px 0 20px;m
       <input type="number" id="balCustomAmt" placeholder="Özel tutar girin (min ₺10)" min="10">
     </div>
     <div class="panel" style="max-width:480px;">
-      <div class="ck-sec-title" style="margin-bottom:16px;">Kart Bilgileri</div>
-      <div class="ck-field"><label class="ck-lbl">Kart Numarası</label><div class="card-wrap"><input class="ck-input" id="balCardNum" type="text" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric"><span class="card-brand" id="balCardBrand">KART</span></div></div>
-      <div class="ck-row" style="margin-bottom:14px;">
-        <div class="ck-field" style="margin-bottom:0;"><label class="ck-lbl">Son Kullanma</label><input class="ck-input" id="balExp" type="text" placeholder="AA / YY" maxlength="7"></div>
-        <div class="ck-field" style="margin-bottom:0;"><label class="ck-lbl">CVV</label><input class="ck-input" id="balCvv" type="text" placeholder="•••" maxlength="4" inputmode="numeric"></div>
-      </div>
-      <div class="ck-field"><label class="ck-lbl">Kart Üzerindeki Ad</label><input class="ck-input" id="balCardName" type="text" placeholder="Ad Soyad"></div>
-      <button class="ck-submit" id="balSubmitBtn" style="margin-top:8px;">
+    <div class="ck-sec-title" style="margin-bottom:16px;">Kart Bilgileri</div>
+    <div class="ck-field">
+        <label class="ck-lbl">Kart Numarası</label>
+        <div class="card-wrap">
+            <input class="ck-input" id="balCardNum" name="kart_numarasi" type="text" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric">
+        </div>
+    </div>
+    <div class="ck-row" style="margin-bottom:14px;">
+        <div class="ck-field" style="margin-bottom:0;">
+            <label class="ck-lbl">Son Kullanma</label>
+            <input class="ck-input" id="balExp" name="son_kullanma" type="text" placeholder="AA / YY" maxlength="7">
+        </div>
+        <div class="ck-field" style="margin-bottom:0;">
+            <label class="ck-lbl">CVV</label>
+            <input class="ck-input" id="balCvv" name="cvv" type="text" placeholder="•••" maxlength="4" inputmode="numeric">
+        </div>
+    </div>
+    <div class="ck-field">
+        <label class="ck-lbl">Kart Üzerindeki Ad</label>
+        <input class="ck-input" id="balCardName" name="ad_soyad" type="text" placeholder="Ad Soyad">
+    </div>
+    <button class="ck-submit" id="balSubmitBtn" style="margin-top:8px;">
         <span class="ck-lbl-txt">Bakiye Yükle</span>
         <div class="spin"></div>
-      </button>
-    </div>
+    </button>
+</div>
   </div>
 </div>
 
